@@ -1,0 +1,162 @@
+---
+img_root: xray_root
+signal_to_noise_ratio: 0.8
+multi_view_per_sample: true
+to_each_view_its_own_label: false
+experiments:
+  train_set:
+    annotations_path: inner_train_2023-12-22.csv
+    num_jitters: 1
+    spatial_transform: random
+    shared_modalities:
+      - ID
+      - text
+      - image
+      - Exam_View
+      - Side
+      - Body_Part
+    modalities:
+      BP_shoulder:
+        modality: output
+        type: Multi_Bipolar
+        to_each_view_its_own_label: false
+        columns:
+          - alt_oa_hamada_0_to_1
+          - alt_oa_hamada_0_to_2
+          - alt_oa_hamada_1_to_3
+          - alt_oa_samilson_mild_or_moderate
+          - alt_oa_samilson_none_or_mild
+          - ao_clavicle_¤Displaced
+          - ao_clavicle_¤Nondisplaced
+          - ao_clavicle_1
+          - ao_clavicle_1A
+          - ao_clavicle_2
+          - ao_clavicle_2A
+          - ao_clavicle_2B
+          - ao_clavicle_2C
+          - ao_clavicle_3
+          - ao_clavicle_3¤a
+          - ao_clavicle_3¤b
+          - ao_clavicle_3¤c
+          - ao_clavicle_3A
+          - ao_clavicle_3B
+          - ao_humerus_diaphysis_A
+          - ao_humerus_diaphysis_A1
+          - ao_humerus_diaphysis_A2
+          - ao_humerus_diaphysis_A3
+          - ao_humerus_diaphysis_B
+          - ao_humerus_diaphysis_B2
+          - ao_humerus_diaphysis_C
+          - ao_humerus_diaphysis_C¤i
+          - ao_humerus_diaphysis_C¤j
+          - ao_humerus_diaphysis_C3
+          - ao_humerus_diaphysis_Distal_1/3
+          - ao_humerus_diaphysis_Middle_1/3
+          - ao_humerus_diaphysis_Proximal_1/3
+          - ao_humerus_proximal_>_50%
+          - ao_humerus_proximal_¤Displaced
+          - ao_humerus_proximal_¤Nondisplaced
+          - ao_humerus_proximal_A
+          - ao_humerus_proximal_A1
+          - ao_humerus_proximal_A11
+          - ao_humerus_proximal_A2
+          - ao_humerus_proximal_A21
+          - ao_humerus_proximal_A23
+          - ao_humerus_proximal_B
+          - ao_humerus_proximal_B1
+          - ao_humerus_proximal_B1¤u
+          - ao_humerus_proximal_B1¤v
+          - ao_humerus_proximal_B11
+          - ao_humerus_proximal_C
+          - ao_humerus_proximal_C1
+          - ao_humerus_proximal_C11
+          - ao_humerus_proximal_C11n
+          - ao_humerus_proximal_C13
+          - ao_humerus_proximal_C3
+          - ao_humerus_proximal_C31
+          - ao_humerus_proximal_Complete
+          - ao_scapula_¤Displaced
+          - ao_scapula_¤Nondisplaced
+          - ao_scapula_A
+          - ao_scapula_A1
+          - ao_scapula_A2
+          - ao_scapula_B
+          - ao_scapula_B¤l
+          - ao_scapula_B¤m
+          - ao_scapula_B1
+          - ao_scapula_B2
+          - ao_scapula_F
+          - ao_scapula_F¤f
+          - ao_scapula_F¤i
+          - ao_scapula_F0
+          - ao_scapula_F1
+          - ao_scapula_F11
+          - ao_scapula_F13
+          - Fracture
+          - general_Anchors
+          - general_Anterior
+          - general_Arthroplasty
+          - general_Calcium
+          - general_Clavicle
+          - general_Dislocation
+          - general_Dislocation_AC-joint
+          - general_Dislocation_AC-joint_II
+          - general_Dislocation_AC-joint_III
+          - general_Dislocation_humeroscapular
+          - general_Failures
+          - general_Healed
+          - general_Healing
+          - general_Hemi
+          - general_Hill-sachs
+          - general_Humerus
+          - general_Humerus,_diaphysis
+          - general_Humerus,_distal_end_segment
+          - general_Humerus,_proximal_segment
+          - general_Implant
+          - general_Old_fracture
+          - general_Pathological_fracture
+          - general_Plate
+          - general_Pseudo
+          - general_Repositioned
+          - general_Scapula
+          - general_Screws
+          - general_Sublux
+          - general_Tumor
+          - oa_favard_Anterior
+          - oa_favard_E0
+          - oa_favard_E1
+          - oa_favard_E2
+          - oa_favard_E3
+          - oa_favard_E4
+          - oa_favard_Posterior
+          - oa_hamada_0
+          - oa_hamada_1
+          - oa_hamada_2
+          - oa_hamada_3
+          - oa_hamada_4
+          - oa_hamada_4a
+          - oa_hamada_4b
+          - oa_hamada_5
+          - oa_hamada_AVN
+          - oa_hamada_AVN_IV
+          - oa_hamada_AVN_V
+          - oa_samilson_Definitive
+          - oa_samilson_Mild
+          - oa_samilson_Moderate
+          - oa_samilson_None
+          - oa_samilson_Severe
+  # pseudo_train_set:
+  #   annotations_path: inner_pseudo_train_2023-12-22.csv
+  #   num_jitters: 1
+  #   spatial_transform: random
+  #   modalities: same_as_train_set
+  val_set:
+    annotations_path: inner_validation_2023-12-22.csv
+    num_jitters: 1
+    spatial_transform: fix
+    modalities: same_as_train_set
+  test_set:
+    annotations_path: inner_test_2023-12-22.csv
+    num_jitters: 1
+    spatial_transform: fix
+    modalities: same_as_train_set

@@ -1,0 +1,139 @@
+---
+img_root: xray_root
+signal_to_noise_ratio: 0.8
+multi_view_per_sample: true
+to_each_view_its_own_label: false
+experiments:
+  train_set:
+    annotations_path: inner_train_2023-12-22.csv
+    num_jitters: 1
+    spatial_transform: random
+    shared_modalities:
+      - ID
+      - text
+      - image
+      - Exam_View
+      - Side
+    modalities:
+      BP_elbow:
+        modality: output
+        type: Multi_Bipolar
+        to_each_view_its_own_label: false
+        columns:
+          - alt_Inflammatory_arthritis_severe
+          - alt_Osteoarthritis_mild
+          - alt_Osteoarthritis_severe
+          - alt_radius_proximal_clear_A
+          - alt_radius_proximal_clear_A2
+          - alt_radius_proximal_clear_B
+          - alt_radius_proximal_clear_B1
+          - alt_ulna_proximal_B2_tip_or_<_50%
+          - ao_humerus_diaphysis_A
+          - ao_humerus_diaphysis_A1
+          - ao_humerus_diaphysis_Distal
+          - ao_humerus_distal_¤¤¤h
+          - ao_humerus_distal_A
+          - ao_humerus_distal_A1
+          - ao_humerus_distal_A11
+          - ao_humerus_distal_A12
+          - ao_humerus_distal_A2
+          - ao_humerus_distal_A23
+          - ao_humerus_distal_A3
+          - ao_humerus_distal_B
+          - ao_humerus_distal_B1
+          - ao_humerus_distal_B11
+          - ao_humerus_distal_B12
+          - ao_humerus_distal_B3
+          - ao_humerus_distal_C
+          - ao_humerus_distal_C1
+          - ao_humerus_distal_C11
+          - ao_humerus_distal_C13
+          - ao_humerus_distal_C2
+          - ao_humerus_distal_C21
+          - ao_humerus_distal_C3
+          - ao_humerus_distal_diaphysis
+          - ao_radius_diaphysis_A
+          - ao_radius_diaphysis_A2
+          - ao_radius_diaphysis_A3
+          - ao_radius_diaphysis_B
+          - ao_radius_diaphysis_B2
+          - ao_radius_diaphysis_Distal
+          - ao_radius_diaphysis_Middle
+          - ao_radius_proximal_A
+          - ao_radius_proximal_A2
+          - ao_radius_proximal_Angulated
+          - ao_radius_proximal_B
+          - ao_radius_proximal_B1
+          - ao_radius_proximal_B3
+          - ao_radius_proximal_C
+          - ao_radius_proximal_C1
+          - ao_radius_proximal_C3
+          - ao_radius_proximal_Dislocated
+          - ao_ulna_diaphysis_A
+          - ao_ulna_diaphysis_A1
+          - ao_ulna_diaphysis_A2
+          - ao_ulna_diaphysis_A3
+          - ao_ulna_diaphysis_B
+          - ao_ulna_diaphysis_B2
+          - ao_ulna_diaphysis_Distal
+          - ao_ulna_diaphysis_Middle
+          - ao_ulna_diaphysis_Proximal
+          - ao_ulna_proximal_A
+          - ao_ulna_proximal_A1
+          - ao_ulna_proximal_B
+          - ao_ulna_proximal_B1
+          - ao_ulna_proximal_B1,_multifragmentary
+          - ao_ulna_proximal_B1,_simple
+          - ao_ulna_proximal_B2
+          - ao_ulna_proximal_B2,_<_50%
+          - ao_ulna_proximal_B2,_sublime_facet
+          - ao_ulna_proximal_B2,_tip
+          - ao_ulna_proximal_C3
+          - ao_ulna_proximal_Dislocated
+          - Fracture
+          - general_Arthritis
+          - general_Dislocation
+          - general_Effusion
+          - general_Elbow_arthroplasty
+          - general_Hardware_fracture
+          - general_Humerus
+          - general_Humerus,_diaphysis
+          - general_Humerus,_distal_end_segment
+          - general_IM-nail
+          - general_Implant
+          - general_Implant_failure
+          - general_Inflammatory_arthritis
+          - general_Medium
+          - general_Mild
+          - general_Old_fracture
+          - general_Osteoaarthritis
+          - general_Osteolysis
+          - general_Plate
+          - general_Radius
+          - general_Radius,_diaphysis
+          - general_Radius,_distal_end_segment
+          - general_Radius,_proximal_end_segment
+          - general_Redislocation
+          - general_Screws
+          - general_Severe
+          - general_Tumor
+          - general_Ulna
+          - general_Ulna,_diaphysis
+          - general_Ulna,_distal_end_segment
+          - general_Ulna,_proximal_end_segment
+          - general_Zuggertung
+  # pseudo_train_set:
+  #   annotations_path: inner_pseudo_train_2023-12-22.csv
+  #   num_jitters: 1
+  #   spatial_transform: random
+  #   modalities: same_as_train_set
+  val_set:
+    annotations_path: inner_validation_2023-12-22.csv
+    num_jitters: 1
+    spatial_transform: fix
+    modalities: same_as_train_set
+  test_set:
+    annotations_path: inner_test_2023-12-22.csv
+    num_jitters: 1
+    spatial_transform: fix
+    modalities: same_as_train_set

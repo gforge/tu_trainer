@@ -1,0 +1,26 @@
+---
+modality: input
+type: Image_from_Filename
+column_name: Filename
+colorspace: Gray
+scale_to: 256
+keep_aspect: true
+# width: 256
+# height: 256
+model_cfgs:
+  model_type: One_to_One
+  heads:
+    - image
+  tails:
+    - implicit_image
+  neural_net_cfgs:
+    neural_net_type: Cascade
+    block_type: ResNetBasic
+    block_output_cs: [64, 64]
+    block_counts: [1, 1]
+    kernel_sizes: [3, 3]
+    custom_dropout:
+      height: 60
+      width: 60
+      number: 4
+      prop_border_to_ignore: .2

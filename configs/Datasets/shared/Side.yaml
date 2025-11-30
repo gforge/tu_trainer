@@ -1,0 +1,8 @@
+---
+modality: output
+type: Bipolar
+column_name: Side
+dictionary:
+  positive: right
+  negative: left
+to_each_view_its_own_label: false

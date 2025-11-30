@@ -1,0 +1,16 @@
+---
+modality: input
+type: Char_Sequence
+column_name: Rprt
+case_sensitive: false
+dictionary: " .,\\-abcdefghijklmnopqrstuvwxyzäåö$()"
+discard_numbers: true
+sentence_length: 512
+model_cfgs:
+  neural_net_cfgs:
+    neural_net_type: Cascade
+    block_type: ResNetBasic
+    add_max_pool_after_each_block: true
+    block_output_cs: [64, 64]
+    block_counts: [1, 1]
+    kernel_sizes: [5, 3]

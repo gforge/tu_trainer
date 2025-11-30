@@ -1,0 +1,76 @@
+---
+modalities:
+  experiment_modalities:
+    - image
+    - EXPERIMENT_EXPLICIT_CLASSIFICATION_MODALITIES
+    - EXPERIMENT_EXPLICIT_REGRESSION_MODALITIES
+  graph_specific_modalities:
+    abstract_visual_fork:
+      type: Implicit
+      consistency: 2D
+    concrete_visual_style:
+      type: Style
+      distribution: gaussian
+      num_channels: 128
+      consistency: 2D
+      modality: output
+    abstract_visual_style:
+      type: Style
+      distribution: gaussian
+      num_channels: 128
+      consistency: 2D
+      modality: output
+    concrete_image:
+      type: Implicit
+      consistency: 2D
+      num_channels: 64
+models:
+  experiment_models:
+    - image
+    - EXPERIMENT_EXPLICIT_CLASSIFICATION_MODALITIES
+    - EXPERIMENT_EXPLICIT_REGRESSION_MODALITIES
+  graph_specific_models:
+    concrete_visual_fork_path:
+      model_type: One_to_Many
+      heads:
+        - implicit_image
+      tails:
+        - concrete_image
+        - implicit_concrete_visual_style
+      neural_net_cfgs:
+        neural_net_type: Fork
+        consistency: 2D
+    visual_path:
+      model_type: One_to_One
+      heads:
+        - concrete_image
+      tails:
+        - abstract_visual_fork
+      neural_net_cfgs:
+        neural_net_type: Cascade
+        consistency: 2D
+        block_type: ResNetBasic
+        add_max_pool_after_each_block: true
+        block_output_cs:
+          - 64
+          - 128
+          - 256
+          - 512
+        block_counts:
+          - 2
+          - 2
+          - 6
+          - 6
+        ladder: true
+    abstract_visual_fork_path:
+      model_type: One_to_Many
+      heads:
+        - abstract_visual_fork
+      tails:
+        - implicit_ID
+        - implicit_abstract_visual_style
+        - EXPERIMENT_IMPLICIT_REGRESSION_MODALITIES
+        - EXPERIMENT_IMPLICIT_CLASSIFICATION_MODALITIES
+      neural_net_cfgs:
+        neural_net_type: Fork
+        consistency: 2D

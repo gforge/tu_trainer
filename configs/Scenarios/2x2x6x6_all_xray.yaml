@@ -1,0 +1,135 @@
+---
+graph_name: 2x2x6x6_visual_only_graph
+optimizer_type: ASGD
+main_task: ComplicationsHip
+forward_noise: 0.05
+jitter_pool: mean
+view_pool: AvgTopPerc50
+batch_size: 60
+loss_weight_type: basic
+experiment_modality_settings:
+  image:
+    modality: input
+    type: Image_from_Filename
+    column_name: Filename
+    colorspace: Gray
+    # The size for the b4 network
+    scale_to: 300
+    keep_aspect: true
+scenes:
+  - name: I_clean_w_dropout
+    repeat: 1
+    epochs: 120
+    forward_noise: 0
+    use_custom_dropout: false
+    view_dropout: .25
+    tasks:
+      - Ankle/unregulated
+      - Elbow/unregulated
+      - Hip/unregulated
+      - Hand/unregulated
+      - ComplicationsHip/unregulated
+      - HOT/unregulated
+      - Knee/unregulated
+      - Shoulder/unregulated
+      - Wrist/unregulated
+    learning_rate:
+      type: decay
+      function: cosine
+      starting_value: 2.5e-2
+  # - name: I_restart
+  #   repeat: 1
+  #   epochs: 30
+  #   forward_noise: 0
+  #   tasks:
+  #     - Ankle/unregulated
+  #     - Elbow/unregulated
+  #     - Hand/unregulated
+  #     - Hip/unregulated
+  #     - ComplicationsHip/unregulated
+  #     - HOT/unregulated
+  #     - Knee/unregulated
+  #     - Shoulder/unregulated
+  #     - Wrist/unregulated
+  #   learning_rate:
+  #     type: decay
+  #     function: cosine
+  #     starting_value: 1e-5
+  - name: II_chunk
+    repeat: 1
+    epochs: 40
+    forward_noise: 0.2
+    use_custom_dropout: true
+    view_dropout: .25
+    tasks:
+      - Ankle/unregulated
+      - Elbow/unregulated
+      - Hip/unregulated
+      - Hand/unregulated
+      - ComplicationsHip/unregulated
+      - HOT/unregulated
+      - Knee/unregulated
+      - Shoulder/unregulated
+      - Wrist/unregulated
+    learning_rate:
+      type: decay
+      function: cosine
+      starting_value: 1e-2
+  - name: III_weight_adaptation
+    repeat: 1
+    epochs: 20
+    forward_noise: 0.2
+    tasks:
+      - Ankle/unregulated
+      - Elbow/unregulated
+      - Hip/unregulated
+      - Hand/unregulated
+      - ComplicationsHip/unregulated
+      - HOT/unregulated
+      - Knee/unregulated
+      - Shoulder/unregulated
+      - Wrist/unregulated
+    loss_weight_type: sqrt
+    learning_rate:
+      type: decay
+      function: cosine
+      starting_value: 1e-2
+  - name: IV_avg
+    repeat: 5
+    epochs: 80
+    tasks:
+      - Ankle/unregulated
+      - Elbow/unregulated
+      - Hip/unregulated
+      - Hand/unregulated
+      - ComplicationsHip/unregulated
+      - HOT/unregulated
+      - Knee/unregulated
+      - Shoulder/unregulated
+      - Wrist/unregulated
+    stochastic_weight_averaging: true
+    stochastic_weight_averaging_last: false
+    has_pseudo_labels: false
+    forward_noise: 0.2
+    loss_weight_type: sqrt
+    learning_rate:
+      type: decay
+      function: cosine
+      starting_value: 1e-2
+  # - name: IV_final
+  #   repeat: 1
+  #   epochs: 20
+  #   forward_noise: 0.05
+  #   tasks:
+  #     - Ankle/final
+  #     - Elbow/final
+  #     - Hip/final
+  #     - Hand/unregulated
+  #     - HOT/final
+  #     - Knee/final
+  #     - Shoulder/final
+  #     - Wrist/final
+  #   learning_rate:
+  #     type: decay
+  #     function: cosine
+  #     starting_value: 0.005

@@ -1,0 +1,5 @@
+---
+modality: output
+type: One_vs_Rest
+column_name: Exam_view
+to_each_view_its_own_label: true

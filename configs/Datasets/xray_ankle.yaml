@@ -1,0 +1,173 @@
+---
+img_root: xray_root
+signal_to_noise_ratio: 0.9
+multi_view_per_sample: true
+to_each_view_its_own_label: false
+experiments:
+  train_set:
+    annotations_path: inner_train_2023-12-22.csv
+    num_jitters: 1
+    spatial_transform: random
+    shared_modalities:
+      - ID
+      - text
+      - image
+      - Exam_View
+      - Side
+    modalities:
+      BP_ankle:
+        modality: output
+        type: Multi_Bipolar
+        to_each_view_its_own_label: false
+        columns:
+          - alt_ao_malleolar_A11_or_A12
+          - alt_ao_malleolar_A12_or_A13
+          - alt_ao_malleolar_B11_or_B12
+          - alt_ao_malleolar_B11_or_B12_or_B21
+          - alt_ao_malleolar_medial_malleolus
+          - ao_fibula_2
+          - ao_fibula_2¤b
+          - ao_fibula_2¤c
+          - ao_fibula_2A
+          - ao_fibula_2B
+          - ao_fibula_3
+          - ao_fibula_3A
+          - ao_fibula_3B
+          - ao_fibula_Modifier
+          - ao_fibula_Modifier_1
+          - ao_fibula_Modifier_2
+          - ao_fibula_Modifier_4
+          - ao_malleolar_A
+          - ao_malleolar_A1
+          - ao_malleolar_A11
+          - ao_malleolar_A12
+          - ao_malleolar_A13
+          - ao_malleolar_A2
+          - ao_malleolar_A21
+          - ao_malleolar_A23
+          - ao_malleolar_A3
+          - ao_malleolar_A31
+          - ao_malleolar_B
+          - ao_malleolar_B1
+          - ao_malleolar_B11
+          - ao_malleolar_B12
+          - ao_malleolar_B13
+          - ao_malleolar_B2
+          - ao_malleolar_B2¤u
+          - ao_malleolar_B21
+          - ao_malleolar_B22
+          - ao_malleolar_B23
+          - ao_malleolar_B3
+          - ao_malleolar_B3¤u
+          - ao_malleolar_B31
+          - ao_malleolar_B32
+          - ao_malleolar_B33
+          - ao_malleolar_C
+          - ao_malleolar_C¤¤t
+          - ao_malleolar_C¤¤u
+          - ao_malleolar_C1
+          - ao_malleolar_C11
+          - ao_malleolar_C12
+          - ao_malleolar_C13
+          - ao_malleolar_C2
+          - ao_malleolar_C21
+          - ao_malleolar_C22
+          - ao_malleolar_C23
+          - ao_malleolar_C3
+          - ao_malleolar_C3¤r
+          - ao_malleolar_C31
+          - ao_malleolar_C33
+          - ao_malleolar_Modifier
+          - ao_malleolar_Modifier_1
+          - ao_malleolar_Modifier_2
+          - ao_malleolar_Modifier_3
+          - ao_malleolar_Modifier_3_a
+          - ao_malleolar_Modifier_4
+          - ao_malleolar_Modifier_5
+          - ao_malleolar_Modifier_5_d
+          - ao_malleolar_Modifier_6
+          - ao_malleolar_Modifier_6_d
+          - ao_malleolar_Modifier_7
+          - ao_malleolar_Modifier_9
+          - ao_Previous
+          - ao_tibia_diaphysis_A
+          - ao_tibia_diaphysis_A1
+          - ao_tibia_diaphysis_B
+          - ao_tibia_diaphysis_B2
+          - ao_tibia_distal_A
+          - ao_tibia_distal_A1
+          - ao_tibia_distal_A11
+          - ao_tibia_distal_A2
+          - ao_tibia_distal_B
+          - ao_tibia_distal_B1
+          - ao_tibia_distal_B11
+          - ao_tibia_distal_B12
+          - ao_tibia_distal_C
+          - foot_bones_Calcaneus
+          - foot_bones_Os_metatarsale
+          - foot_bones_Os_metatarsale_II
+          - foot_bones_Os_metatarsale_V
+          - foot_bones_Os_naviculare
+          - foot_bones_Talus
+          - Fracture
+          - general_Degenerative
+          - general_Dislocation
+          - general_Dislocation_lateral
+          - general_Dislocation_posterior
+          - general_Dislocation_repositioned
+          - general_Fibula
+          - general_Foot
+          - general_Implants
+          - general_Lower_leg
+          - general_Malleolar
+          - general_Previous
+          - general_Previous_early
+          - general_Previous_healed
+          - general_Previous_late
+          - general_Tibia
+          - general_Tibia_diaphyseal
+          - general_Tibia_distal
+          - implants_Cerclage
+          - implants_Nail
+          - implants_Plate
+          - implants_Screws
+          - implants_Staple
+          - post_malleolar_<_1_mm
+          - post_malleolar_1-2_mm
+          - post_malleolar_2-3_mm
+          - post_malleolar_Medium
+          - post_malleolar_Small
+      BP_ankle_images:
+        modality: output
+        type: Multi_Bipolar
+        to_each_view_its_own_label: true
+        columns:
+          - alt_max_data_medial_clear_space_same
+          - data_medial_clear_space_same
+      M_ankle:
+        modality: output
+        type: Multi_Line
+        to_each_view_its_own_label: true
+        column_prefixes:
+          - data_medial_clear_space
+          - data_tibiotalar_distance
+  # pseudo_train_set:
+  #   annotations_path: inner_pseudo_train_2023-12-22.csv
+  #   num_jitters: 1
+  #   spatial_transform: random
+  #   modalities: same_as_train_set
+  # max_train_set:
+  #   annotations_path: inner_train_max_2023-12-22.csv
+  #   num_jitters: 1
+  #   spatial_transform: random
+  #   modalities: same_as_train_set
+  val_set:
+    annotations_path: inner_validation_2023-12-22.csv
+    num_jitters: 1
+    spatial_transform: fix
+    modalities: same_as_train_set
+  test_set:
+    annotations_path: inner_test_2023-12-22.csv
+    num_jitters: 1
+    spatial_transform: fix
+    modalities: same_as_train_set

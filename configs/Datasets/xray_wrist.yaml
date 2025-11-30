@@ -1,0 +1,190 @@
+---
+img_root: xray_root
+signal_to_noise_ratio: 0.7
+multi_view_per_sample: true
+to_each_view_its_own_label: false
+experiments:
+  train_set:
+    annotations_path: inner_train_2023-12-22.csv
+    num_jitters: 1
+    spatial_transform: random
+    shared_modalities:
+      - ID
+      - text
+      - image
+      - Exam_View
+      - Side
+    modalities:
+      BP_wrist:
+        modality: output
+        type: Multi_Bipolar
+        to_each_view_its_own_label: false
+        columns:
+          - alt_ao_R_colles
+          - alt_ao_R_colles_A22_A31
+          - alt_ao_R_sagitall_simple
+          - alt_v2_arthritis_Arthritis_severe
+          - alt_v2_arthritis_CMC-I_mild
+          - alt_v2_arthritis_CMC-I_moderate
+          - alt_v2_arthritis_CMC-I_severe
+          - alt_v2_arthritis_DRU_mild
+          - alt_v2_arthritis_DRU_moderate
+          - alt_v2_arthritis_DRU_severe
+          - alt_v2_arthritis_Radiocarpal_moderate
+          - alt_v2_arthritis_Radiocarpal_severe
+          - ao_radius_diaphysis_A
+          - ao_radius_diaphysis_A2
+          - ao_radius_diaphysis_A3
+          - ao_radius_diaphysis_Distal
+          - ao_radius_distal_A
+          - ao_radius_distal_A1
+          - ao_radius_distal_A2
+          - ao_radius_distal_A21
+          - ao_radius_distal_A22
+          - ao_radius_distal_A23
+          - ao_radius_distal_A3
+          - ao_radius_distal_A31
+          - ao_radius_distal_A32
+          - ao_radius_distal_A33
+          - ao_radius_distal_B
+          - ao_radius_distal_B1
+          - ao_radius_distal_B11
+          - ao_radius_distal_B13
+          - ao_radius_distal_B2
+          - ao_radius_distal_B21
+          - ao_radius_distal_B22
+          - ao_radius_distal_B3
+          - ao_radius_distal_B31
+          - ao_radius_distal_B33
+          - ao_radius_distal_C
+          - ao_radius_distal_C¤¤dorsal
+          - ao_radius_distal_C¤¤step_off
+          - ao_radius_distal_C¤¤t
+          - ao_radius_distal_C¤¤u
+          - ao_radius_distal_C¤¤volar
+          - ao_radius_distal_C1
+          - ao_radius_distal_C11
+          - ao_radius_distal_C12
+          - ao_radius_distal_C13
+          - ao_radius_distal_C2
+          - ao_radius_distal_C21
+          - ao_radius_distal_C22
+          - ao_radius_distal_C23
+          - ao_radius_distal_C3
+          - ao_radius_distal_C31
+          - ao_radius_distal_C32
+          - ao_radius_distal_C33
+          - ao_radius_distal_Diaphyseal_extension
+          - ao_radius_distal_DRUJ_stable
+          - ao_radius_distal_DRUJ_unstable
+          - ao_radius_distal_Mis-aligned
+          - ao_radius_distal_Repositioned
+          - ao_radius_distal_Repositioned_acceptable
+          - ao_radius_distal_Repositioned_good
+          - ao_radius_distal_Repositioned_poor
+          - ao_radius_distal_Volar_discontinuity
+          - ao_radius_distal_Volar_discontinuity_repositioned
+          - ao_ulna_diaphysis_A
+          - ao_ulna_diaphysis_A1
+          - ao_ulna_diaphysis_A2
+          - ao_ulna_diaphysis_A3
+          - ao_ulna_diaphysis_Distal
+          - ao_ulna_diaphysis_Middle
+          - ao_ulna_distal_A
+          - ao_ulna_distal_A1
+          - ao_ulna_distal_A11
+          - ao_ulna_distal_A12
+          - ao_ulna_distal_A2
+          - ao_ulna_distal_A21
+          - ao_ulna_distal_A22
+          - ao_ulna_distal_A23
+          - ao_ulna_distal_A3
+          - ao_ulna_distal_B
+          - ao_ulna_distal_C
+          - arthritis_Arthritis
+          - arthritis_CMC-I
+          - arthritis_CMC-I_I
+          - arthritis_CMC-I_II
+          - arthritis_CMC-I_III
+          - arthritis_CMC-I_IV
+          - arthritis_DRU
+          - arthritis_DRU_I
+          - arthritis_DRU_II
+          - arthritis_DRU_III
+          - arthritis_mild
+          - arthritis_moderate
+          - arthritis_Radiocarpal
+          - arthritis_Radiocarpal_I
+          - arthritis_Radiocarpal_II
+          - arthritis_Radiocarpal_III
+          - arthritis_severe
+          - arthritis_STT
+          - arthritis_STT_I
+          - arthritis_STT_II
+          - arthritis_STT_III
+          - arthritis_STT_IV
+          - Fracture
+          - general_Arthritis
+          - general_Cast
+          - general_Cast_minimal
+          - general_Cast_plaster
+          - general_Cast_synthetic
+          - general_Hand
+          - general_Implant
+          - general_Osteopenia
+          - general_Previous
+          - general_Radius
+          - general_Radius,_diaphysis
+          - general_Radius,_distal
+          - general_SL_dislocation
+          - general_Ulna
+          - general_Ulna,_diaphysis
+          - general_Ulna,_distal
+          - implant_K-wires
+          - implant_Plate
+          - implant_X-fix
+      BP_wrist_images:
+        modality: output
+        type: Multi_Bipolar
+        to_each_view_its_own_label: true
+        columns:
+          - data_frontal_inclination_same
+          - data_lateral_tilt_same
+      M_wrist_frontal_line:
+        modality: output
+        type: Multi_Line
+        to_each_view_its_own_label: true
+        column_prefixes:
+          - data_frontal_ulna_axis
+      M_wrist_frontal_independent_line:
+        modality: output
+        type: Multi_Independent_Line
+        to_each_view_its_own_label: true
+        column_prefixes:
+          - data_frontal_inclination
+      M_wrist_lateral_independent_line:
+        modality: output
+        type: Multi_Independent_Line
+        to_each_view_its_own_label: true
+        column_prefixes:
+          - data_lateral_tilt
+  # pseudo_train_set:
+  #   annotations_path: inner_pseudo_train_2023-12-22.csv
+  #   num_jitters: 1
+  #   spatial_transform: random
+  #   modalities: same_as_train_set
+  # max_train_set:
+  #   annotations_path: inner_train_max_2023-12-22.csv
+  #   num_jitters: 1
+  #   spatial_transform: random
+  #   modalities: same_as_train_set
+  val_set:
+    annotations_path: inner_validation_2023-12-22.csv
+    num_jitters: 1
+    spatial_transform: fix
+    modalities: same_as_train_set
+  test_set:
+    annotations_path: inner_test_2023-12-22.csv
+    num_jitters: 1
+    spatial_transform: fix
+    modalities: same_as_train_set
